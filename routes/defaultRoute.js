@@ -84,4 +84,9 @@ router.route('/infomation/:id')
 
 router.route('/infomation/:id')
     .post(defaultControllers.SubmitPostAvatar);
+
+
+/*------------STICKET : DAT VE-------------*/
+router.route('/sticket/:id')
+    .get(defaultControllers.getTicketBox);
 module.exports = router;

@@ -1,5 +1,6 @@
 const Film = require('../models/FilmModel.js').Film;
 const Showtime = require('../models/ShowtimeModel').Showtime;
+const Sticket = require('../models/SticketModel').Sticket;
 const User  = require('../models/UserModel.js').User;
 const {isEmpty} = require('../config/customFunction');
 const passport = require('passport');
@@ -181,6 +182,23 @@ module.exports = {
                         res.redirect(`/infomation/${updateAvatar._id}`);
                     })
 
+            })
+        
+    },
+    getTicketBox : (req,res) => {
+        const id = req.params.id;
+        Film.findById(id)
+        .populate('cinema')
+            .then(Film => {
+                Sticket.find()
+                    .populate('showtime')
+                    .then(Sticket => {
+                        res.render('default/sticket/index', {
+                            Film: Film,
+                            Sticket: Sticket
+                        });
+                    })
+                    
             })
         
     }
