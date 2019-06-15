@@ -1,5 +1,6 @@
 const Film = require('../models/FilmModel').Film;
 const Admin = require('../models/AdminModel').Admin;
+const User = require('../models/AdminModel').User;
 const Category = require('../models/CategoryModel').Category;
 const Cineplex = require('../models/CineplexModel').Cineplex;
 const Cinema = require('../models/CinemaModel').Cinema;
@@ -332,5 +333,22 @@ module.exports = {
             }).catch(err => {
                 console.log(err);
             })
-    }
+    },
+	getUser : (req,res) => {
+		User.find()
+			.then(User => {
+				res.render('admin/user/index',{User : User});
+			})
+	},
+	DeleteUser : (req,res) => {
+		const id = req.params.id;
+		User.findByIdAndDelete(id)
+			.then(deleteUser => {
+				req.flash('success-message',`Deleted ${deleteUser.fullname} successfuly`);
+				res.redirect('/admin/user');
+			}).catch(err => {
+				console.log(err);
+			})
+	}
+	
 }

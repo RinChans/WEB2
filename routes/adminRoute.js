@@ -97,9 +97,15 @@ router.route('/showtime/create')
     .get(adminController.createShowtime)
     .post(adminController.submitShowtime);
 
-
-
 router.route('/showtime/delete/:id')
     .delete(adminController.deleteShowtime);
+
+//-------------USER : NGUOI DUNG--------------//
+
+router.route('/user')
+	.get(adminController.getUser);
+
+router.route('/user/delete/:id')
+	.delete(adminController.DeleteUser);
 
 module.exports = router;
